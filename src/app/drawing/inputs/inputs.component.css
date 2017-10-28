@@ -1,0 +1,34 @@
+label{
+    padding-top: 6px;
+}
+.input-container{
+    clear: both;
+}
+.color-picker{
+    width: 100px;
+    margin: auto;
+}
+.color-picker input{
+    width: 70px;
+    float: right;
+}
+.color-picker .example{
+    width: 30px;
+    height: 30px;
+}
+input[type="number"]{
+    padding: 2px 5px;
+    margin: 5px 5px;
+    width: calc(50% - 40px);
+    float: left;
+}
+button{    
+    float: right;
+}
+.remove-icon{
+    margin-top: 10px;
+    float: right;
+    margin: 2px 7px;
+    cursor: pointer;
+    color: #0275d8;
+}

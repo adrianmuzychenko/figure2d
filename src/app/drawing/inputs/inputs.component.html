@@ -1,0 +1,28 @@
+<p>
+  Колір:
+</p>
+<div class="color-picker">
+  <input (colorPickerChange)="drawingDetails.color=$event" [colorPicker]="drawingDetails.color" [value]="drawingDetails.color"
+  />
+  <div class="example" [style.background]="drawingDetails.color"></div>
+</div>
+<hr>
+<p>
+  Координати:
+</p>
+<div class="input-container" *ngFor="let coordinate of drawingDetails.coordinates; let index = index">
+  <label class="float-left">{{index + 1}}</label>
+  <input [(ngModel)]="drawingDetails.coordinates[index].valueX" class="form-control input-sm" placeholder="x" type="number">
+  <input [(ngModel)]="drawingDetails.coordinates[index].valueY" class="form-control input-sm" placeholder="y" type="number">
+  <button type="button" class="remove-icon btn-link" (click)="removeCoordinate(index)">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</div>
+<div class="btn-group float-right">
+  <button class="btn btn-primary" (click)="addCoordinate()">
+        +
+  </button>
+  <button class="btn btn-primary" (click)="drawImage()">
+      <i class="fa fa-picture-o" aria-hidden="true"></i>
+  </button>
+</div>
