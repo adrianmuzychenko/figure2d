@@ -6,6 +6,7 @@ import { ColorPickerModule } from 'angular4-color-picker';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { NgDragDropModule } from 'ng-drag-drop';
 
+
 import { AppComponent } from './app.component';
 import { AppDrawingComponent } from './drawing/drawing.component';
 import { PictureComponent } from './drawing/picture/picture.component';
