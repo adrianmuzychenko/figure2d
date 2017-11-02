@@ -3,6 +3,7 @@ label{
 }
 .input-container{
     clear: both;
+    height: 40px;
 }
 .color-picker{
     width: 100px;
@@ -25,10 +26,11 @@ input[type="number"]{
 button{    
     float: right;
 }
-.remove-icon{
+.coordinate-button{
+    padding: 6px 3px;
     margin-top: 10px;
     float: right;
-    margin: 2px 7px;
+    margin: 2px 2px;
     cursor: pointer;
     color: #0275d8;
 }

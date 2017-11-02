@@ -1,9 +1,9 @@
-interface ICoordinate {
-  valueX: number;
-  valueY: number;
+interface ICoordinates {
+  x: number;
+  y: number;
 }
 
 export interface IDrawingDetails {
   color: string;
-  coordinates: ICoordinate[];
+  coordinates: ICoordinates[];
 }

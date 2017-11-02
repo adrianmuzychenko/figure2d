@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { Surface, Path, Text, Group } from '@progress/kendo-drawing';
 import { ColorPickerModule } from 'angular4-color-picker';
+import { LocalStorageModule } from 'angular-2-local-storage';
+import { NgDragDropModule } from 'ng-drag-drop';
+
 
 import { AppComponent } from './app.component';
 import { AppDrawingComponent } from './drawing/drawing.component';
@@ -20,7 +23,12 @@ import { InputsComponent } from './drawing/inputs/inputs.component';
   imports: [
     FormsModule,
     BrowserModule,
-    ColorPickerModule
+    NgDragDropModule.forRoot(),
+    ColorPickerModule,
+    LocalStorageModule.withConfig({
+      prefix: 'my-app',
+      storageType: 'localStorage'
+  })
   ],
   providers: [],
   bootstrap: [AppComponent]
