@@ -1,0 +1,6 @@
+<div class="scroll-container">
+    <app-shape-details *ngFor="let shape of drawingDetails.shapes; let index = index;" [(figureDetails)]="drawingDetails.shapes[index]"
+        [index]="index" (deletedShapeIndex)="removeShape($event)"></app-shape-details>
+</div>
+<hr />
+<button class="btn btn-primary btn-link" (click)="addShape()">Додадити фігуру</button>

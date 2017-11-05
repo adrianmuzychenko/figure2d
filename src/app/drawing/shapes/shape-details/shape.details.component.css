@@ -1,6 +1,11 @@
 label{
     padding-top: 6px;
 }
+.fa-trash-o{
+    color: #ca1313;
+    font-size: 23px;
+    cursor: pointer;
+}
 .input-container{
     clear: both;
     height: 40px;
@@ -23,7 +28,7 @@ input[type="number"]{
     width: calc(50% - 40px);
     float: left;
 }
-button{    
+.input-container button{    
     float: right;
 }
 .coordinate-button{

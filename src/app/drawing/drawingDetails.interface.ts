@@ -1,9 +1,14 @@
 interface ICoordinates {
-  x: number;
-  y: number;
+  x?: number;
+  y?: number;
+}
+
+export interface IFigure {
+  name?: string;
+  color: string;
+  coordinates: ICoordinates[];
 }
 
 export interface IDrawingDetails {
-  color: string;
-  coordinates: ICoordinates[];
+  shapes: IFigure[];
 }

@@ -1,0 +1,32 @@
+<hr>
+
+<input [(ngModel)]="figureDetails.name" placeholder="Назва фігури" />
+<i (click)="removeShape(figureIndex)" class="fa fa-trash-o" aria-hidden="true"></i>
+<p>
+  Колір:
+</p>
+<div class="color-picker">
+  <input (colorPickerChange)="figureDetails.color=$event" [colorPicker]="figureDetails.color" [value]="figureDetails.color"
+  />
+  <div class="example" [style.background]="figureDetails.color"></div>
+</div>
+
+<p>
+  Координати:
+</p>
+<div droppable draggable [dragScope]="[figureIndex]" [dropScope]="[figureIndex]" [dragData]="{coordinates: coordinate, startIndex: index}" (onDrop)="onCoordinateDrop($event, index)"
+  class="input-container" *ngFor="let coordinate of figureDetails.coordinates; let index = index">
+  <label class="float-left">{{index + 1}}</label>
+  <input [(ngModel)]="coordinate.x" class="form-control input-sm" placeholder="x" type="number">
+  <input [(ngModel)]="coordinate.y" class="form-control input-sm" placeholder="y" type="number">
+  <button type="button" class="coordinate-button btn btn-link btn-sm" (click)="removeCoordinate(index)">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+  <button #dragHandle type="button" class="coordinate-button btn btn-link btn-sm">
+    <i class="fa fa-arrows" aria-hidden="true"></i>
+  </button>
+</div>
+
+<button class="btn btn-sm btn-primary" (click)="addCoordinate()">
+  +
+</button>
