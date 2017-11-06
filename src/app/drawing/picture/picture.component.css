@@ -4,3 +4,12 @@
     margin-top: 30px;
     pointer-events: none;
 }
+select{
+    min-width: 100px;
+    max-width: 200px;
+    height: 30px;
+}
+svg{
+    width: 1009px;
+    height: 100%;
+}

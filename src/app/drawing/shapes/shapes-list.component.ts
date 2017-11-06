@@ -18,10 +18,7 @@ export class ShapesListComponent {
       this.drawingDetails = drawingDetails;
     } else {
       this.drawingDetails = {
-        shapes: [{
-          coordinates: [{ x: 0, y: 0 }],
-          color: "#396a34"
-        }]
+        shapes: []
       }
     }
   }

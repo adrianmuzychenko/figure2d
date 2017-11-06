@@ -1,5 +1,4 @@
 import { OnDestroy, Component, ElementRef, ViewChild } from '@angular/core';
-import { Surface, Path, Text, Group } from '@progress/kendo-drawing';
 
 import { IDrawingDetails, IFigure } from '../drawingDetails.interface';
 
@@ -8,46 +7,37 @@ import { IDrawingDetails, IFigure } from '../drawingDetails.interface';
   templateUrl: './picture.component.html',
   styleUrls: ['./picture.component.css']
 })
-export class PictureComponent implements OnDestroy {
-  @ViewChild('surface')
-  surfaceElement: ElementRef;
+export class PictureComponent {
   containerSize: number = 500;
-  surface: Surface;
   pictures: IDrawingDetails;
+  _selectedPicture: IFigure;
+
+  get selectedPicture(): IFigure {
+    if (this._selectedPicture == null && this.pictures !== null) {
+      this._selectedPicture = this.pictures.shapes[0];
+    }
+    return this._selectedPicture;
+  }
+  set selectedPicture(picture: IFigure) {
+    this._selectedPicture = picture;
+  }
 
   constructor() { }
 
-  public ngOnDestroy() {
-    this.surface.destroy();
-  }
-
   drawFigure(data: IDrawingDetails) {
     this.pictures = data;
-    const element = this.surfaceElement.nativeElement;
-    this.surface = Surface.create(element);
-    const group = new Group();
 
     this.pictures.shapes.forEach(shape => {
-      let path = new Path({
-        fill: {
-          color: shape.color
-        },
-        stroke: {
-          color: shape.color
-        }
+      shape.svgPath = "M";
+      shape.coordinates.forEach((coordinate) => {
+        shape.svgPath += ` ${coordinate.x} ${coordinate.y}`
       });
-      shape.coordinates.forEach(coordinate => {
-        path.lineTo(coordinate.x, coordinate.y);
-      });
-      path.close();
-      group.append(path);
+      shape.svgPath += "Z";
     })
-
-    this.surface.draw(group);
   }
 
   rotateLeft() {
-    this.pictures.shapes[0].coordinates.map(coordinate => {
+    this.selectedPicture.coordinates.map(coordinate => {
       let offset = this.containerSize - coordinate.x;
       coordinate.x = coordinate.y;
       coordinate.y = offset;
@@ -55,7 +45,7 @@ export class PictureComponent implements OnDestroy {
   }
 
   rotateRight() {
-    this.pictures.shapes[0].coordinates.map(coordinate => {
+    this.selectedPicture.coordinates.map(coordinate => {
       let offset = this.containerSize - coordinate.y;
       coordinate.y = coordinate.x;
       coordinate.x = offset;
@@ -63,14 +53,14 @@ export class PictureComponent implements OnDestroy {
   }
 
   movePicture(offsetX: number, offsetY: number) {
-    this.pictures.shapes[0].coordinates.map(coordinate => {
+    this.selectedPicture.coordinates.map(coordinate => {
       coordinate.x += offsetX;
       coordinate.y += offsetY;
     });
   }
 
   zoomPicture(zoom: number) {
-    this.pictures.shapes[0].coordinates.map(coordinate => {
+    this.selectedPicture.coordinates.map(coordinate => {
       coordinate.x = Math.round(coordinate.x * zoom);
       coordinate.y = Math.round(coordinate.y * zoom);
     });

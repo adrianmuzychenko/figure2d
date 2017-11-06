@@ -23,5 +23,16 @@
     <button class="btn btn-sm btn-primary" (click)="zoomPicture(0.667)">
         <i class="fa fa-search-minus" aria-hidden="true"></i>
     </button>
+    <select [(ngModel)]="selectedPicture">
+        <option *ngFor="let picture of pictures.shapes" [ngValue]="picture">
+            {{picture.name}}
+        </option>
+    </select>
 </div>
-<div class="picture" [ngStyle]="{'width.px': containerSize, 'height.px': containerSize}" #surface></div>
+<div class="picture" [ngStyle]="{'width.px': containerSize, 'height.px': containerSize}">
+    <svg>
+        <g>
+            <path *ngFor="let shape of pictures.shapes" [attr.d]="shape.svgPath" [attr.stroke]="shape.color" [attr.fill]="shape.color"></path>
+        </g>
+    </svg>
+</div>

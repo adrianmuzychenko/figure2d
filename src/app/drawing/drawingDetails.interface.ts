@@ -6,6 +6,7 @@ interface ICoordinates {
 export interface IFigure {
   name?: string;
   color: string;
+  svgPath?: string;
   coordinates: ICoordinates[];
 }
 

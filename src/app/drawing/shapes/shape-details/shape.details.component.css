@@ -1,10 +1,21 @@
 label{
     padding-top: 6px;
 }
+.fa{
+    cursor: pointer;
+}
 .fa-trash-o{
     color: #ca1313;
     font-size: 23px;
-    cursor: pointer;
+}
+.shape-details{
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+}
+.shape-details.collapsed{
+    max-height: 500px;
+    transition: max-height 0.3s ease-in;
 }
 .input-container{
     clear: both;
