@@ -2,10 +2,15 @@
 <i (click)="isCollapsed = true" [hidden]="isCollapsed" class="fa fa-chevron-down" aria-hidden="true"></i>
 <i (click)="isCollapsed = false" [hidden]="!isCollapsed" class="fa fa-chevron-up" aria-hidden="true"></i>
 <input [(ngModel)]="figureDetails.name" placeholder="Назва фігури" [style.color]="figureDetails.color" />
-<i (click)="removeShape(figureIndex)" class="fa fa-trash-o" aria-hidden="true"></i>
+<button (click)="removeShape(figureIndex)" type="button" class="btn btn-link btn-sm">
+  <i class="fa fa-trash-o" aria-hidden="true"></i>
+</button>
+<button type="button" class="coordinate-button btn btn-link btn-sm">
+  <i class="fa fa-arrows drag-shape" aria-hidden="true"></i>
+</button>
 <div [class]="isCollapsed ? 'shape-details collapsed' : 'shape-details'">
   <p>
-    Колір:
+    Color:
   </p>
   <div class="color-picker">
     <input (colorPickerChange)="figureDetails.color=$event" [colorPicker]="figureDetails.color" [value]="figureDetails.color"
@@ -14,9 +19,9 @@
   </div>
 
   <p>
-    Координати:
+    Coordinates:
   </p>
-  <div droppable draggable [dragHandle]="'.drag-icon'" [dragScope]="[figureIndex]" [dropScope]="[figureIndex]" [dragData]="{coordinates: coordinate, startIndex: index}"
+  <div droppable draggable [dragHandle]="'.drag-coordinate'" [dragScope]="[figureIndex]" [dropScope]="[figureIndex]" [dragData]="{coordinates: coordinate, startIndex: index}"
     (onDrop)="onCoordinateDrop($event, index)" class="input-container" *ngFor="let coordinate of figureDetails.coordinates; let index = index">
     <label class="float-left">{{index + 1}}</label>
     <input [(ngModel)]="coordinate.x" class="form-control input-sm" placeholder="x" type="number">
@@ -25,7 +30,7 @@
       <i class="fa fa-times" aria-hidden="true"></i>
     </button>
     <button type="button" class="coordinate-button btn btn-link btn-sm">
-      <i #dragHandle class="fa fa-arrows drag-icon" aria-hidden="true"></i>
+      <i #dragHandle class="fa fa-arrows drag-coordinate" aria-hidden="true"></i>
     </button>
   </div>
 

@@ -1,7 +1,8 @@
 label{
     padding-top: 6px;
 }
-.fa{
+.fa[class*="fa-chevron"],
+button{
     cursor: pointer;
 }
 .fa-trash-o{

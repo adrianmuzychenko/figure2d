@@ -23,7 +23,7 @@ export class ShapeDetailsComponent {
     this.figureDetails.coordinates.splice(index, 1);
   }
 
-  onCoordinateDrop(e: any, insertIndex) {
+  onCoordinateDrop(e: any, insertIndex: number) {
     this.figureDetails.coordinates.splice(e.dragData.startIndex, 1);
     this.figureDetails.coordinates.splice(insertIndex, 0, e.dragData.coordinates);
   }

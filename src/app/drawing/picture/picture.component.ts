@@ -1,16 +1,39 @@
 import { OnDestroy, Component, ElementRef, ViewChild } from '@angular/core';
 
 import { IDrawingDetails, IFigure } from '../drawingDetails.interface';
+import { KeyCodes } from '../../shared/constants';
 
 @Component({
   selector: 'app-picture',
   templateUrl: './picture.component.html',
+  host: { '(window:keydown)': 'hotkeys($event)' },
   styleUrls: ['./picture.component.css']
 })
 export class PictureComponent {
   containerSize: number = 500;
   pictures: IDrawingDetails;
   _selectedPicture: IFigure;
+
+  hotkeys(event) {
+    switch (event.keyCode) {
+      case KeyCodes.left:
+        this.movePicture(-1, 0);
+        event.preventDefault();
+        break;
+      case KeyCodes.top:
+        this.movePicture(0, -1);
+        event.preventDefault();
+        break;
+      case KeyCodes.right:
+        this.movePicture(1, 0);
+        event.preventDefault();
+        break;
+      case KeyCodes.down:
+        this.movePicture(0, 1);
+        event.preventDefault();
+        break;
+    }
+  }
 
   get selectedPicture(): IFigure {
     if (this._selectedPicture == null && this.pictures !== null) {

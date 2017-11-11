@@ -28,7 +28,6 @@ export class ShapesListComponent {
   }
 
   ngDoCheck() {
-    this.localStorageService.set('coordinates', this.drawingDetails);
     this.drawFigure();
   }
 
@@ -45,6 +44,15 @@ export class ShapesListComponent {
 
   removeShape(shapeIndex: number){
     this.drawingDetails.shapes.splice(shapeIndex, 1);
+  }
+
+  saveData(){
+    this.localStorageService.set('coordinates', this.drawingDetails);    
+  }
+
+  onShapeDrop(e: any, insertIndex: number){
+    this.drawingDetails.shapes.splice(e.dragData.startIndex, 1);
+    this.drawingDetails.shapes.splice(insertIndex, 0, e.dragData.shape);
   }
 
 }

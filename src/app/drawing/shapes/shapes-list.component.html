@@ -1,6 +1,10 @@
 <div class="scroll-container">
     <app-shape-details *ngFor="let shape of drawingDetails.shapes; let index = index;" [(figureDetails)]="drawingDetails.shapes[index]"
-        [index]="index" (deletedShapeIndex)="removeShape($event)"></app-shape-details>
+        [index]="index" (deletedShapeIndex)="removeShape($event)"
+        droppable draggable [dragScope]="['shapes']" [dropScope]="['shapes']" [dragHandle]="'.drag-shape'"
+        [dragData]="{shape: shape, startIndex: index}"
+        (onDrop)="onShapeDrop($event, index)"></app-shape-details>
 </div>
 <hr />
-<button class="btn btn-primary btn-link" (click)="addShape()">Додадити фігуру</button>
+<button class="btn btn-primary btn-link" (click)="addShape()">Add shape</button>
+<button class="btn btn-primary btn-link" (click)="saveData()">Save data</button>
