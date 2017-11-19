@@ -9,7 +9,7 @@ import { IFigure } from '../../drawingDetails.interface';
 export class ShapeDetailsComponent {
   @Input() figureDetails: IFigure;
   @Input('index') figureIndex: number;
-  @Output() deletedShapeIndex: EventEmitter<number> = new EventEmitter();
+  @Output() deletedShapeIndex = new EventEmitter<number>();
   
   isCollapsed = false;
 

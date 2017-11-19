@@ -1,4 +1,4 @@
-import { OnDestroy, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { IDrawingDetails, IFigure } from '../drawingDetails.interface';
 import { KeyCodes } from '../../shared/constants';
@@ -13,6 +13,7 @@ export class PictureComponent {
   containerSize: number = 500;
   pictures: IDrawingDetails;
   _selectedPicture: IFigure;
+  canMoveFigure = false;
 
   hotkeys(event) {
     switch (event.keyCode) {
@@ -88,4 +89,5 @@ export class PictureComponent {
       coordinate.y = Math.round(coordinate.y * zoom);
     });
   }
+  
 }

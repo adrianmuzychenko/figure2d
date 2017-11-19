@@ -29,10 +29,12 @@
         </option>
     </select>
 </div>
+
 <div class="picture" [ngStyle]="{'width.px': containerSize, 'height.px': containerSize}">
-    <svg>
+    <svg (click)="canMoveFigure = flase">
         <g>
-            <path *ngFor="let shape of pictures.shapes" [attr.d]="shape.svgPath" [attr.stroke]="shape.color" [attr.fill]="shape.color"></path>
+            <path appMoveFigure [shape]="shape" [canMoveFigure]="canMoveFigure" (onChangeCanMoveFigure)="canMoveFigure = $event" (onCoordinatesChange)="shape.coordinates = $event"
+                *ngFor="let shape of pictures.shapes" [attr.d]="shape.svgPath" [attr.stroke]="shape.color" [attr.fill]="shape.color"></path>
         </g>
     </svg>
 </div>

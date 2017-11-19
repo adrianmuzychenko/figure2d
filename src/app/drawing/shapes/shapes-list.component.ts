@@ -1,7 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, Output, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { LocalStorageService } from 'angular-2-local-storage';
+import { ToastrService } from 'ngx-toastr';
+
 import { IDrawingDetails } from '../drawingDetails.interface';
+import { AppSettings } from '../../shared/constants';
 
 @Component({
   selector: 'app-shapes-list',
@@ -9,31 +12,9 @@ import { IDrawingDetails } from '../drawingDetails.interface';
   styleUrls: ['./shapes-list.component.css']
 })
 export class ShapesListComponent {
-  @Output() draw: EventEmitter<IDrawingDetails> = new EventEmitter();
-  drawingDetails: IDrawingDetails;
+  @Input('shapes') drawingDetails: IDrawingDetails;
 
-  constructor(public localStorageService: LocalStorageService) {
-    let drawingDetails = this.localStorageService.get('coordinates') as IDrawingDetails;
-    if (drawingDetails) {
-      this.drawingDetails = drawingDetails;
-    } else {
-      this.drawingDetails = {
-        shapes: []
-      }
-    }
-  }
-
-  ngAfterViewInit() {
-    this.drawFigure();
-  }
-
-  ngDoCheck() {
-    this.drawFigure();
-  }
-
-  drawFigure() {
-    this.draw.emit(this.drawingDetails);
-  }
+  constructor(private http: HttpClient, private toastr: ToastrService) { }
 
   addShape() {
     this.drawingDetails.shapes.push({
@@ -42,15 +23,20 @@ export class ShapesListComponent {
     });
   }
 
-  removeShape(shapeIndex: number){
+  removeShape(shapeIndex: number) {
     this.drawingDetails.shapes.splice(shapeIndex, 1);
   }
 
-  saveData(){
-    this.localStorageService.set('coordinates', this.drawingDetails);    
+  saveData() {
+    this.http.post(`${AppSettings.baseURL}/shapes`, this.drawingDetails)
+      .subscribe(data =>{
+        this.toastr.success(data['message'], 'Success!', {positionClass: 'toast-bottom-right'});
+      }, err =>{
+        this.toastr.error(err['message'], 'Error!', {positionClass: 'toast-bottom-right'});        
+      });
   }
 
-  onShapeDrop(e: any, insertIndex: number){
+  onShapeDrop(e: any, insertIndex: number) {
     this.drawingDetails.shapes.splice(e.dragData.startIndex, 1);
     this.drawingDetails.shapes.splice(insertIndex, 0, e.dragData.shape);
   }
