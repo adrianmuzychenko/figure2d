@@ -1,11 +1,12 @@
 # figure2d
 
-pplication that allows you to create and edit shapes with coordinates. After changing the coordinates, the figure should be removed in accordance with the new data.
+Application that allows you to create and edit shapes with coordinates. After changing the coordinates, the figure should be removed in accordance with the new data.
 
 ## Development server
 
 Run `npm install` for restore packages
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Open `runServer.bat` for running server part.
 
 ## Build
 
