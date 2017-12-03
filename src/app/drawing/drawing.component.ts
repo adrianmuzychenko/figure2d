@@ -1,33 +1,14 @@
-import { Component, ViewChild, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
 
 import { IDrawingDetails } from "./drawingDetails.interface";
-import { AppSettings } from "../shared/constants";
+import { DrawingService } from "./drawing.service";
 
 @Component({
   selector: "app-drawing",
   templateUrl: "./drawing.component.html",
-  styleUrls: ["./drawing.component.css"]
+  styleUrls: ["./drawing.component.css"],
+  providers: [DrawingService]
 })
-export class AppDrawingComponent implements OnInit {
-  @ViewChild("pictureComponent") pictureComponent;
-  drawingDetails: IDrawingDetails;
-
-  constructor(private http: HttpClient) {
-    this.drawingDetails = {
-      shapes: []
-    };
-  }
-
-  ngOnInit(): void {
-    this.http.get(`${AppSettings.baseURL}/shapes`).subscribe(data => {
-      if (data) {
-        this.drawingDetails = data as IDrawingDetails;
-      }
-    });
-  }
-
-  ngDoCheck() {
-    this.pictureComponent.drawFigure(this.drawingDetails);
-  }
+export class AppDrawingComponent {
+  constructor() {}
 }

@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 
 import { IDrawingDetails, IFigure } from "../drawingDetails.interface";
 import { KeyCodes } from "../../shared/constants";
+import { DrawingService } from "../drawing.service";
 
 @Component({
   selector: "app-picture",
@@ -14,6 +15,12 @@ export class PictureComponent {
   pictures: IDrawingDetails;
   _selectedPicture: IFigure;
   canMoveFigure = false;
+
+  constructor(private drawingService: DrawingService) {}
+
+  ngDoCheck() {
+    this.drawFigure(this.drawingService.drawingDetails);
+  }
 
   hotkeys(event) {
     switch (event.keyCode) {
@@ -45,8 +52,6 @@ export class PictureComponent {
   set selectedPicture(picture: IFigure) {
     this._selectedPicture = picture;
   }
-
-  constructor() {}
 
   drawFigure(data: IDrawingDetails) {
     this.pictures = data;

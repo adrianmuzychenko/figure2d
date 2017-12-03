@@ -1,10 +1,7 @@
-import { Component, Output, Input } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-
-import { ToastrService } from "ngx-toastr";
+import { Component } from "@angular/core";
 
 import { IDrawingDetails } from "../drawingDetails.interface";
-import { AppSettings } from "../../shared/constants";
+import { DrawingService } from "../drawing.service";
 
 @Component({
   selector: "app-shapes-list",
@@ -12,40 +9,31 @@ import { AppSettings } from "../../shared/constants";
   styleUrls: ["./shapes-list.component.css"]
 })
 export class ShapesListComponent {
-  @Input("shapes") drawingDetails: IDrawingDetails;
+  drawingDetails: IDrawingDetails;
 
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
+  constructor(private drawingService: DrawingService) {}
 
   addShape() {
-    this.drawingDetails.shapes.push({
+    this.drawingService.drawingDetails.shapes.push({
       coordinates: [{ x: 0, y: 0 }],
       color: "#396a34"
     });
   }
 
   removeShape(shapeIndex: number) {
-    this.drawingDetails.shapes.splice(shapeIndex, 1);
+    this.drawingService.drawingDetails.shapes.splice(shapeIndex, 1);
   }
 
   saveData() {
-    this.http
-      .post(`${AppSettings.baseURL}/shapes`, this.drawingDetails)
-      .subscribe(
-        data => {
-          this.toastr.success(data["message"], "Success!", {
-            positionClass: "toast-bottom-right"
-          });
-        },
-        err => {
-          this.toastr.error(err["message"], "Error!", {
-            positionClass: "toast-bottom-right"
-          });
-        }
-      );
+    this.drawingService.saveDrawingDetails();
   }
 
   onShapeDrop(e: any, insertIndex: number) {
-    this.drawingDetails.shapes.splice(e.dragData.startIndex, 1);
-    this.drawingDetails.shapes.splice(insertIndex, 0, e.dragData.shape);
+    this.drawingService.drawingDetails.shapes.splice(e.dragData.startIndex, 1);
+    this.drawingService.drawingDetails.shapes.splice(
+      insertIndex,
+      0,
+      e.dragData.shape
+    );
   }
 }

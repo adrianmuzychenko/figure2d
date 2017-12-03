@@ -1,5 +1,5 @@
 <div class="scroll-container">
-    <app-shape-details *ngFor="let shape of drawingDetails.shapes; let index = index;" [(figureDetails)]="drawingDetails.shapes[index]"
+    <app-shape-details *ngFor="let shape of drawingService.drawingDetails.shapes; let index = index;" [(figureDetails)]="drawingService.drawingDetails.shapes[index]"
         [index]="index" (deletedShapeIndex)="removeShape($event)"
         droppable draggable [dragScope]="['shapes']" [dropScope]="['shapes']" [dragHandle]="'.drag-shape'"
         [dragData]="{shape: shape, startIndex: index}"
