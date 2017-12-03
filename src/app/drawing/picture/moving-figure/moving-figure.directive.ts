@@ -1,8 +1,15 @@
-import { Directive, ElementRef, HostListener, Input, Output, EventEmitter } from '@angular/core';
-import { IFigure } from '../../drawingDetails.interface';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  Output,
+  EventEmitter
+} from "@angular/core";
+import { IFigure } from "../../drawingDetails.interface";
 
 @Directive({
-  selector: '[appMoveFigure]'
+  selector: "[appMoveFigure]"
 })
 export class MovingFigureDirective {
   @Input() canMoveFigure: boolean;
@@ -10,22 +17,19 @@ export class MovingFigureDirective {
   @Output() onChangeCanMoveFigure = new EventEmitter<boolean>();
   @Output() onCoordinatesChange = new EventEmitter<Array<any>>();
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef) {}
 
-    console.log(elementRef);
-  }
-
-  @HostListener('mousedown', ['$event'])
+  @HostListener("mousedown", ["$event"])
   onMouseDown() {
     this.onChangeCanMoveFigure.emit(true);
   }
 
-  @HostListener('mouseup', ['$event'])
+  @HostListener("mouseup", ["$event"])
   onMouseUp() {
     this.onChangeCanMoveFigure.emit(false);
   }
 
-  @HostListener('mousemove', ['$event'])
+  @HostListener("mousemove", ["$event"])
   onMouseMove(event) {
     if (this.canMoveFigure) {
       this.shape.coordinates.map(coordinate => {
@@ -35,5 +39,4 @@ export class MovingFigureDirective {
       this.onCoordinatesChange.emit(this.shape.coordinates);
     }
   }
-
 }

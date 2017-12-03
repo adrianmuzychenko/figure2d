@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { IDrawingDetails, IFigure } from '../drawingDetails.interface';
-import { KeyCodes } from '../../shared/constants';
+import { IDrawingDetails, IFigure } from "../drawingDetails.interface";
+import { KeyCodes } from "../../shared/constants";
 
 @Component({
-  selector: 'app-picture',
-  templateUrl: './picture.component.html',
-  host: { '(window:keydown)': 'hotkeys($event)' },
-  styleUrls: ['./picture.component.css']
+  selector: "app-picture",
+  templateUrl: "./picture.component.html",
+  host: { "(window:keydown)": "hotkeys($event)" },
+  styleUrls: ["./picture.component.css"]
 })
 export class PictureComponent {
   containerSize: number = 500;
@@ -46,18 +46,18 @@ export class PictureComponent {
     this._selectedPicture = picture;
   }
 
-  constructor() { }
+  constructor() {}
 
   drawFigure(data: IDrawingDetails) {
     this.pictures = data;
 
     this.pictures.shapes.forEach(shape => {
       shape.svgPath = "M";
-      shape.coordinates.forEach((coordinate) => {
-        shape.svgPath += ` ${coordinate.x} ${coordinate.y}`
+      shape.coordinates.forEach(coordinate => {
+        shape.svgPath += ` ${coordinate.x} ${coordinate.y}`;
       });
       shape.svgPath += "Z";
-    })
+    });
   }
 
   rotateLeft() {
@@ -89,5 +89,4 @@ export class PictureComponent {
       coordinate.y = Math.round(coordinate.y * zoom);
     });
   }
-  
 }

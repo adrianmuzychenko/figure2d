@@ -1,53 +1,53 @@
-label{
-    padding-top: 6px;
+label {
+  padding-top: 6px;
 }
 .fa[class*="fa-chevron"],
-button{
-    cursor: pointer;
+button {
+  cursor: pointer;
 }
-.fa-trash-o{
-    color: #ca1313;
-    font-size: 23px;
+.fa-trash-o {
+  color: #ca1313;
+  font-size: 23px;
 }
-.shape-details{
-    max-height: 0;
-    transition: max-height 0.3s ease-out;
-    overflow: hidden;
+.shape-details {
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+  overflow: hidden;
 }
-.shape-details.collapsed{
-    max-height: 500px;
-    transition: max-height 0.3s ease-in;
+.shape-details.collapsed {
+  max-height: 500px;
+  transition: max-height 0.3s ease-in;
 }
-.input-container{
-    clear: both;
-    height: 40px;
+.input-container {
+  clear: both;
+  height: 40px;
 }
-.color-picker{
-    width: 100px;
-    margin: auto;
+.color-picker {
+  width: 100px;
+  margin: auto;
 }
-.color-picker input{
-    width: 70px;
-    float: right;
+.color-picker input {
+  width: 70px;
+  float: right;
 }
-.color-picker .example{
-    width: 30px;
-    height: 30px;
+.color-picker .example {
+  width: 30px;
+  height: 30px;
 }
-input[type="number"]{
-    padding: 2px 5px;
-    margin: 5px 5px;
-    width: calc(50% - 40px);
-    float: left;
+input[type="number"] {
+  padding: 2px 5px;
+  margin: 5px 5px;
+  width: calc(50% - 40px);
+  float: left;
 }
-.input-container button{    
-    float: right;
+.input-container button {
+  float: right;
 }
-.coordinate-button{
-    padding: 6px 3px;
-    margin-top: 10px;
-    float: right;
-    margin: 2px 2px;
-    cursor: pointer;
-    color: #0275d8;
+.coordinate-button {
+  padding: 6px 3px;
+  margin-top: 10px;
+  float: right;
+  margin: 2px 2px;
+  cursor: pointer;
+  color: #0275d8;
 }

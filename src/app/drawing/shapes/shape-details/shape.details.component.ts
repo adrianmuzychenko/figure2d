@@ -1,16 +1,16 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { IFigure } from '../../drawingDetails.interface';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { IFigure } from "../../drawingDetails.interface";
 
 @Component({
-  selector: 'app-shape-details',
-  templateUrl: './shape.details.component.html',
-  styleUrls: ['./shape.details.component.css']
+  selector: "app-shape-details",
+  templateUrl: "./shape.details.component.html",
+  styleUrls: ["./shape.details.component.css"]
 })
 export class ShapeDetailsComponent {
   @Input() figureDetails: IFigure;
-  @Input('index') figureIndex: number;
+  @Input("index") figureIndex: number;
   @Output() deletedShapeIndex = new EventEmitter<number>();
-  
+
   isCollapsed = false;
 
   constructor() {}
@@ -28,8 +28,7 @@ export class ShapeDetailsComponent {
     this.figureDetails.coordinates.splice(insertIndex, 0, e.dragData.coordinates);
   }
 
-  removeShape(shapeIndex: number){
+  removeShape(shapeIndex: number) {
     this.deletedShapeIndex.emit(shapeIndex);
   }
-  
 }
